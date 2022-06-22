@@ -31,3 +31,6 @@ insert into junio14 VALUES(
     'trucos3@gmail.com', 'ab'
 );
 ```
+
+## Prueba
+![](img.jpeg)
