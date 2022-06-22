@@ -6,3 +6,15 @@ create table Junio14(
 insert into junio14 VALUES(
     'trucos@gmail.com', 'abcdef'
 );
+
+insert into junio14 VALUES(
+    'trucos1@gmail.com', 'abc'
+);
+
+insert into junio14 VALUES(
+    'trucos0@gmail.com', 'af'
+);
+
+insert into junio14 VALUES(
+    'trucos3@gmail.com', 'ab'
+);

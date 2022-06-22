@@ -15,31 +15,40 @@ conn = psycopg2.connect(
     password="icg28122002"
 )
 cur = conn.cursor()
-cur.execute("select * from junio14;")
+cur.execute("select * from junio14 ORDER BY correo ASC;")
 filas = cur.fetchall()
 print(filas)
 cur.close()
 conn.close()
 
 
+def busqueda_bianria(correo, clave):
+    l = 0
+    r = len(filas)
+    while l < r:
+        mid = (l+r)//2
+        if filas[mid][0] > correo:
+            l = mid + 1
+        elif filas[mid][0] < correo:
+            r = mid-1
+        elif filas[mid][0] == correo:
+            if clave == filas[mid][1]:
+                return jsonify({"valido":1})
+            else:
+                return jsonify({"valido":-1})
+    return jsonify({"valido":0})
+
 
 @app.route("/login",methods=["POST"])
 def login_post():
     json = request.get_json()
-    print(request.form)
     correo = json["user"]
     clave = json["pass"]
-    print(correo, clave)
-    for i in filas:
-        if correo == i[0]:
-            if clave==i[1]:
-                print("VALIDO")
-                return jsonify({"valido":1})
-            else:
-                print("No VALIDO")
-                return jsonify({"valido":0})
-    print("No VALIDO")
-    return jsonify({"valido":0})
+    if len(clave) == 0 or len(correo) == 0:
+        return jsonify({"valido": -2})
+    
+    res = busqueda_bianria(correo, clave)
+    return res
 
 @app.route("/login",methods=["GET"])
 def login_get():

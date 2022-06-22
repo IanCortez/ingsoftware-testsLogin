@@ -40,8 +40,12 @@
 				console.log(jsonResponse.valido)
 				if (jsonResponse.valido == 1)
 					document.getElementById("loginstatus").innerHTML = "Signed in"
+				else if(jsonResponse.valido == -1)
+					document.getElementById("loginstatus").innerHTML = "Wrong password"
+				else if(jsonResponse.valido == -2)
+					document.getElementById("loginstatus").innerHTML = "Missing credentials"
 				else
-					document.getElementById("loginstatus").innerHTML = "Not signed in"
+					document.getElementById('loginstatus').innerHTML = "Wrong user"
             })
         }
 	</script>
